@@ -4,26 +4,26 @@
 
 int i = 0;
 int j = 0;
-// Функция, которую будет выполнять первый поток
+// Р¤СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂСѓСЋ Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЊ РїРµСЂРІС‹Р№ РїРѕС‚РѕРє
 void threadFunction1(bool& finished) {
     while (i <= 5) {
         i++;
         std::cout << "Thread 1 is running" << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-        // Проверка условия завершения потока
+        // РџСЂРѕРІРµСЂРєР° СѓСЃР»РѕРІРёСЏ Р·Р°РІРµСЂС€РµРЅРёСЏ РїРѕС‚РѕРєР°
         if (finished) {
             break;
         }
     }
 }
 
-// Функция, которую будет выполнять второй поток
+// Р¤СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂСѓСЋ Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЊ РІС‚РѕСЂРѕР№ РїРѕС‚РѕРє
 void threadFunction2(bool& finished) {
     while (j<=10) {
         j++;
         std::cout << "Thread 2 is running" << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-        // Проверка условия завершения потока
+        // РџСЂРѕРІРµСЂРєР° СѓСЃР»РѕРІРёСЏ Р·Р°РІРµСЂС€РµРЅРёСЏ РїРѕС‚РѕРєР°
         if (finished) {
             break;
         }
@@ -33,16 +33,16 @@ void threadFunction2(bool& finished) {
 int main() {
 
 
-    bool finished = false; // Флаг для проверки завершения потоков
+    bool finished = false; // Р¤Р»Р°Рі РґР»СЏ РїСЂРѕРІРµСЂРєРё Р·Р°РІРµСЂС€РµРЅРёСЏ РїРѕС‚РѕРєРѕРІ
 
     std::thread thread1(threadFunction1, std::ref(finished));
     std::thread thread2(threadFunction2, std::ref(finished));
 
-    // Ожидание завершения работы потоков
+    // РћР¶РёРґР°РЅРёРµ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РїРѕС‚РѕРєРѕРІ
     thread1.join();
     thread2.join();
 
-    finished = true; // Установка флага завершения потоков
+    finished = true; // РЈСЃС‚Р°РЅРѕРІРєР° С„Р»Р°РіР° Р·Р°РІРµСЂС€РµРЅРёСЏ РїРѕС‚РѕРєРѕРІ
 
     std::cout << "Both threads have finished execution" << std::endl;
 
